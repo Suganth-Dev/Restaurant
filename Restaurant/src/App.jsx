@@ -17,31 +17,36 @@ function App() {
       id: 1,
       name: "South Indian Thali",
       description: "Traditional South Indian meals served on banana leaf",
-      image: south_thali
+      image: south_thali,
+      Rating: 4.5
     },
     {
       id: 2,
       name: "Biryani Special",
       description: "Aromatic biryani made with finest basmati rice and spices",
-      image: biriyani
+      image: biriyani,
+      Rating: 4.5
     },
     {
       id: 3,
       name: "Tandoori Delights",
       description: "Fresh from tandoor - naan, kebabs and more",
-      image: thandhoori
+      image: thandhoori,
+      Rating: 4.5
     },
     {
       id: 4,
       name: "Dosa Corner",
       description: "Crispy dosas with variety of chutneys and sambar",
-      image: dosa
+      image: dosa,
+      Rating: 4.7
     },
     {
       id: 5,
       name: "Curry House",
       description: "Rich and flavorful curries with naan bread",
-      image: curry
+      image: curry,
+      Rating: 4.9
     }
   ]
 
@@ -49,6 +54,10 @@ function App() {
     e.preventDefault()
     console.log('Searching for:', searchQuery)
   }
+ const [resList, setReslist] = useState(restaurants)
+
+//  let reslist1 = restaurants
+
 
   return (
     <div className="app-container">
@@ -76,22 +85,32 @@ function App() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="search-input"
           />
-          <button type="submit" className="search-button">
-            Search
+          <button type="submit" className="search-button" 
+          onClick={()=>{
+            const filteredData = resList.filter((res)=>res.Rating >4.5)
+            setReslist(filteredData)
+          
+            // reslist1 = reslist1.filter((res)=> res.Rating > 4.5 )
+            // console.log(reslist1)
+          }}
+          
+          >
+            Top restaurant
           </button>
         </form>
       </section>
 
       {/* Restaurant Cards Grid */}
       <section className="restaurant-grid">
-        {restaurants.map(restaurant => (
-          <div key={restaurant.id} className="restaurant-card">
+        {resList.map(restaurants => (
+          <div key={restaurants.id} className="restaurant-card">
             <div 
               className="card-image"
-              style={{ backgroundImage: `url(${restaurant.image})` }}
+              style={{ backgroundImage: `url(${restaurants.image})` }}
             ></div>
-            <h3>{restaurant.name}</h3>
-            <p>{restaurant.description}</p>
+            <h3>{restaurants.name}</h3>
+            <p>{restaurants.description}</p>
+            <p>{restaurants.Rating}</p>
           </div>
         ))}
       </section>
