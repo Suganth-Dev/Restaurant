@@ -46,7 +46,7 @@ function App() {
       name: "Curry House",
       description: "Rich and flavorful curries with naan bread",
       image: curry,
-      Rating: 4.9
+      Rating: 4.8
     }
   ]
 
